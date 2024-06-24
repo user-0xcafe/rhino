@@ -147,7 +147,7 @@ impl BTOR2Parser {
         let line = self.lines.get(&nid).unwrap().clone();
         if line[2] == "bitvec" {
             if let Ok(answer) = line[3].parse::<usize>() {
-                return get_nodetype(answer, true);
+                return get_nodetype(answer);
             }
             panic!("Unsupported bitvec: {:?}", line);
         } else if line[2] == "array" {
@@ -313,7 +313,7 @@ impl BTOR2Parser {
                         let bits_src = bits_dest - bits_ext;
                         current_node = Some(NodeRef::from(Node::Ext {
                             nid,
-                            from: get_nodetype(bits_src, true),
+                            from: get_nodetype(bits_src),
                             value,
                         }))
                     }
